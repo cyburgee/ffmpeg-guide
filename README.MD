@@ -1,13 +1,17 @@
 If you've worked with media encoding in the past decade it's likely that you've come across [FFmpeg](https://ffmpeg.org). For those of you who are unfamiliar, in their words: 
-```quote
-FFmpeg is the leading multimedia framework, able to decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created. It supports the most obscure ancient formats up to the cutting edge. 
-```
+
+> FFmpeg is the leading multimedia framework, able to decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created. It supports the most obscure ancient formats up to the cutting edge. 
+
 It's packed with an enormous amount of functionality. It can be a daunting for beginners. It can be baffling for experts. Maybe you can read the [documentation](https://ffmpeg.org/ffmpeg.html) and make some sense of it, or maybe you feel the same way about reading words as me.
 
 ![](inline/no-books.gif)
-*** jk, the FFmpeg docs are great ***
+
+*JK - the FFmpeg docs are great*
 
 In that light, I wrote this post to share and explain some of it's functionality, especially as it relates to GIF transcoding. To follow along you'll need FFmpeg installed. The easiest way to do that is to go [here](https://www.ffmpeg.org/download.html) and find a static build for whatever platform you're working on.
+
+
+## GIF TO VIDEO
 
 Let's start with a simple example. Say you have a gif of my ancient, computer illiterate pug, Benji, and you want to convert it to a video format. Here's one example:
 ```bash
@@ -39,7 +43,8 @@ benji.mp4
 This last argument is our output. It'll create the file if it doesn't exist and if it already exists, you will be prompted on the command line to confirm if you'd like to overwrite the existing file. If you think you know better and are immune to pain and regret then you can add the ` -y ` flag somewhere in your command and it will automatically overwrite the file if it exists.
 
 ![](inline/burning.gif)
-*** Some people just want to see the world burn ***
+
+*Some people just want to see the world burn*
 
 While the above generally works with most content, you may be interested to learn that GIFs support widely varying frame rates or frame delays that when converted to a video format without transformation, can trip up certain video players.
 If I were to use the previous command to convert my contrived and not very useful as a countdown example, `321.gif`, the VLC player on my Mac has trouble playing that mp4. Don't worry, I still love you VLC. If your particular application might be sensitive to such issues, you can try the following command:
@@ -67,9 +72,8 @@ This [vsync](https://ffmpeg.org/ffmpeg.html#toc-Advanced-options) flag tells ffm
 
 That about does it for GIFs to video formats. Here's a [handy guide](https://trac.ffmpeg.org/wiki/Encode/H.264) for encoding H.264 video should you be interested in the ins and outs of that particular format.
 
-***
-VIDEO TO GIF
-***
+
+## VIDEO TO GIF
 
 Note that these methods don't play nicely with sources with transparency/alpha *yet* - hopefully more on that in a future blog post.
 
@@ -190,18 +194,20 @@ scale=480:-1
 Any way you write it, I've specified that I want to scale the input video to width 480 pixels and I want the height to be -1 pixels. Nah - that ain't right. `-1` has a special significance to the scale](https://ffmpeg.org/ffmpeg-filters.html#scale-1) filter. It means I want the filter to maintain the aspect ratio or proportions of the video while resizing the other dimension I specified. 
 
 ***
-"Pro" Tip 1.
+# "Pro" Tip 1.
 `-2` has a similar meaning to `-1` in the scale filter. It means to stay as close to the aspect ratio but round to an even number. This is important for many video codecs which require even dimensions, such as H.264. It doesn't matter for GIFs.
 ***
 
 ***
-"Pro" Tip 2:
+# "Pro" Tip 2:
 If you're changing the frame rate and resizing/scaling your video, resize before increasing the framerate or resize after decreasing the framerate. Your machine won't have to resize as many frames - saving you time and processing power.
 ***
 
 Now we should have a lovely GIF that is a manageable size. But what if for some reason you didn't think it was pretty enough? After all, that whole GIF only has 256 colors across all of its frames. Do you know where I'm going with this? 
 
 ![](inline/no-idea.gif)
+
+*I have no idea what I'm doing*
 
 What if we could create a GIF with FFmpeg that has an insane 256 colors per frame? This is a pretty unique application that's only really necessary if you've got some extremely varied colors, a long gif with multiple scenes, or both. Imma show you how to do it anyways.
 ```bash
@@ -224,4 +230,3 @@ I hope this has been a useful breakdown of FFmpeg and some GIF-related commands.
 Happy GIFfing folks!
 
 ![](inline/success.gif)
-
