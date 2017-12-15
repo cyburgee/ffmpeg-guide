@@ -1,3 +1,5 @@
+# INTRODUCTION
+
 If you've worked with media encoding in the past decade it's likely that you've come across [FFmpeg](https://ffmpeg.org). For those of you who are unfamiliar, in their words: 
 
 > FFmpeg is the leading multimedia framework, able to decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created. It supports the most obscure ancient formats up to the cutting edge. 
@@ -11,7 +13,7 @@ It's packed with an enormous amount of functionality. It can be a daunting for b
 In that light, I wrote this post to share and explain some of it's functionality, especially as it relates to GIF transcoding. To follow along you'll need FFmpeg installed. The easiest way to do that is to go [here](https://www.ffmpeg.org/download.html) and find a static build for whatever platform you're working on.
 
 
-## GIF TO VIDEO
+# GIF TO VIDEO
 
 Let's start with a simple example. Say you have a gif of my ancient, computer illiterate pug, Benji, and you want to convert it to a video format. Here's one example:
 ```bash
@@ -73,7 +75,7 @@ This [vsync](https://ffmpeg.org/ffmpeg.html#toc-Advanced-options) flag tells ffm
 That about does it for GIFs to video formats. Here's a [handy guide](https://trac.ffmpeg.org/wiki/Encode/H.264) for encoding H.264 video should you be interested in the ins and outs of that particular format.
 
 
-## VIDEO TO GIF
+# VIDEO TO GIF
 
 Note that these methods don't play nicely with sources with transparency/alpha *yet* - hopefully more on that in a future blog post.
 
@@ -152,7 +154,7 @@ Next up:
 The semicolon indicates that we're specifying a new filter, and it's the [palettegen](https://ffmpeg.org/ffmpeg-filters.html#palettegen-1) filter we all know and love. As you can see the input to this one is `[a]` that we defined as the output of the [split](https://ffmpeg.org/ffmpeg-filters.html#split_002c-asplit) filter before this one. The output of this filter is `[p]` which stands for "pug" or "palette" - whichever one you want to believe.
 
 ![](inline/pug-swarm.gif)
-*** Approximately 80% of my thoughts are pug-related ***
+*Approximately 80% of my thoughts are pug-related*
 
 Next our filtergraph has:
 ```
@@ -193,15 +195,11 @@ scale=480:-1
 ```
 Any way you write it, I've specified that I want to scale the input video to width 480 pixels and I want the height to be -1 pixels. Nah - that ain't right. `-1` has a special significance to the scale](https://ffmpeg.org/ffmpeg-filters.html#scale-1) filter. It means I want the filter to maintain the aspect ratio or proportions of the video while resizing the other dimension I specified. 
 
-***
-# "Pro" Tip 1.
+##### "Pro" Tip 1.
 `-2` has a similar meaning to `-1` in the scale filter. It means to stay as close to the aspect ratio but round to an even number. This is important for many video codecs which require even dimensions, such as H.264. It doesn't matter for GIFs.
-***
 
-***
-# "Pro" Tip 2:
+##### "Pro" Tip 2:
 If you're changing the frame rate and resizing/scaling your video, resize before increasing the framerate or resize after decreasing the framerate. Your machine won't have to resize as many frames - saving you time and processing power.
-***
 
 Now we should have a lovely GIF that is a manageable size. But what if for some reason you didn't think it was pretty enough? After all, that whole GIF only has 256 colors across all of its frames. Do you know where I'm going with this? 
 
