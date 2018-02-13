@@ -46,7 +46,7 @@ This last argument is our output. It'll create the file if it doesn't exist and 
 
 ![](inline/burning.gif)
 
-*Some people just want to see the world burn*
+*uses `-y` in ffmpeg indiscriminately*
 
 While the above generally works with most content, you may be interested to learn that GIFs support widely varying frame rates or frame delays that when converted to a video format without transformation, can trip up certain video players.
 If I were to use the previous command to convert my contrived and not very useful as a countdown example, `321.gif`, the VLC player on my Mac has trouble playing that mp4. Don't worry, I still love you VLC. If your particular application might be sensitive to such issues, you can try the following command:
@@ -154,6 +154,7 @@ Next up:
 The semicolon indicates that we're specifying a new filter, and it's the [palettegen](https://ffmpeg.org/ffmpeg-filters.html#palettegen-1) filter we all know and love. As you can see the input to this one is `[a]` that we defined as the output of the [split](https://ffmpeg.org/ffmpeg-filters.html#split_002c-asplit) filter before this one. The output of this filter is `[p]` which stands for "pug" or "palette" - whichever one you want to believe.
 
 ![](inline/pug-swarm.gif)
+
 *Approximately 80% of my thoughts are pug-related*
 
 Next our filtergraph has:
