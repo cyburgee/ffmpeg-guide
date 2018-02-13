@@ -4,7 +4,7 @@ If you've worked with media encoding in the past decade it's likely that you've 
 
 > FFmpeg is the leading multimedia framework, able to decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created. It supports the most obscure ancient formats up to the cutting edge. 
 
-It's packed with an enormous amount of functionality. It can be a daunting for beginners. It can be baffling for experts. Maybe you can read the [documentation](https://ffmpeg.org/ffmpeg.html) and make some sense of it, or maybe you feel the same way about reading words as me.
+It's packed with an enormous amount of functionality. It can be daunting for beginners. It can be baffling for experts. Maybe you can read the [documentation](https://ffmpeg.org/ffmpeg.html) and make some sense of it, or maybe you feel the same way about reading words as me.
 
 ![](inline/no-books.gif)
 
